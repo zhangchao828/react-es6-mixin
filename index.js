@@ -21,4 +21,4 @@ function mixin(component,mixins=[]){
         }
     }
 }
-export default mixin;
+exports.mixin=mixin;
