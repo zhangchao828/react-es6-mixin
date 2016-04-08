@@ -21,4 +21,3 @@ function mixin(component,mixins=[]){
         }
     }
 }
-module.exports = mixin;

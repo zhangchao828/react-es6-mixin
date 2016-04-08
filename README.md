@@ -52,3 +52,5 @@ react-es6-mixin
             alert(this.refs.input.value);
         }
     })
+     
+   
