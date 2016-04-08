@@ -15,7 +15,6 @@ function mixin(component,mixins=[]){
     if(typeof mixins==='function'){
         inject(mixins,component);
     }else{
-        //Object.prototype.toString.call(mixins) ==='[object Array]'
         let count=mixins.length;
         for(let i=0;i<count;i++){
             inject(mixins[i],component);
