@@ -1,24 +1,33 @@
-function inject(mixinFun,component){
-    let mixinObj=mixinFun(component);
-    let keys=Object.keys(mixinObj);
-    let keysLen=keys.length;
-    for(let i=0;i<keysLen;i++){
-        let key=keys[i];
-        if(!key.startsWith('$')){
+(function(){
+    'use strict';
+    var inject=function inject(mixinFun,component){
+        var mixinObj=mixinFun(component);
+        var keys=Object.keys(mixinObj);
+        var keysLen=keys.length;
+        for(var i=0;i<keysLen;i++){
+            var key=keys[i];
             key==='getInitialState'?
                 component.state=mixinObj[key]():
                 component[key]=mixinObj[key];
         }
     }
-}
-function mixin(component,mixins=[]){
-    if(typeof mixins==='function'){
-        inject(mixins,component);
-    }else{
-        let count=mixins.length;
-        for(let i=0;i<count;i++){
-            inject(mixins[i],component);
+    var mixin=function minxin(component,mixins){
+        if(typeof mixins==='function'){
+            inject(mixins,component);
+        }else{
+            var count=mixins.length;
+            for(var i=0;i<count;i++){
+                inject(mixins[i],component);
+            }
         }
     }
-}
-exports.mixin=mixin;
+    if (typeof module !== 'undefined' && module.exports) {
+        module.exports = mixin;
+    } else if (typeof define === 'function' && typeof define.amd === 'object' && define.amd) {
+        define('mixin', [], function () {
+            return mixin;
+        });
+    } else {
+        window.mixin = mixin;
+    }
+}());
